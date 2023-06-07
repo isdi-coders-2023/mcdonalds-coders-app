@@ -2,7 +2,9 @@
 
 This is the boilerplate for McDonalds Coders App.
 
-The app is deployed in [https://mcdonalds-coders-10-2022.netlify.app/](https://mcdonalds-coders-10-2022.netlify.app/)
+The app is deployed in [https://202305-mcdonalds-coders.netlify.app/](https://202305-mcdonalds-coders.netlify.app/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/377881d4-49ed-40c1-aab4-6cffc8101ff0/deploy-status)](https://app.netlify.com/sites/202305-mcdonalds-coders/deploys)
 
 The app is connected to sonar for code quality validation
 
