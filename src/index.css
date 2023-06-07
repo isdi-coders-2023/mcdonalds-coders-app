@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Nunito Sans", "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  /* color guide */
+  --mc-red: #da291c;
+  --mc-yellow: #ffc72c;
+  --mc-black: #27251f;
+}
+
+/* FIX FOR REACTSTRAP MODAL (piece of shit) */
+.fade {
+  opacity: 1;
+}
