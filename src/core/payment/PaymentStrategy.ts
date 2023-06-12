@@ -8,12 +8,12 @@ export type CardData = {
 };
 
 export interface PaymentStrategy {
-  getPaymentMethod(): string;
+  getPaymentMethod(): PAYMENT_TYPE;
   pay?(): any;
 }
 
 class CashPaymentStrategy implements PaymentStrategy {
-  getPaymentMethod(): string {
+  getPaymentMethod(): PAYMENT_TYPE {
     return PAYMENT_TYPE.CASH;
   }
 }
@@ -24,7 +24,7 @@ export class DebitPaymentStrategy implements PaymentStrategy {
     this.cardData = cardData || { number: '', date: '', cvc: '', isValid: false };
   }
 
-  getPaymentMethod(): string {
+  getPaymentMethod(): PAYMENT_TYPE {
     return PAYMENT_TYPE.DEBIT;
   }
 
@@ -54,7 +54,7 @@ export class DebitPaymentStrategy implements PaymentStrategy {
 }
 
 class wireTransferPaymentStrategy implements PaymentStrategy {
-  getPaymentMethod(): string {
+  getPaymentMethod(): PAYMENT_TYPE {
     return PAYMENT_TYPE.WIRE_TRANSFER;
   }
 }

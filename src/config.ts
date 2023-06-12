@@ -20,10 +20,11 @@ export const STORAGE = {
   COUPONS: 'coupons',
 };
 
-export const PAYMENT_TYPE = {
-  DEBIT: 'DEBITO',
-  CASH: 'EFECTIVO',
-};
+export enum PAYMENT_TYPE {
+  CASH = 'EFECTIVO',
+  DEBIT = 'DEBITO',
+  WIRE_TRANSFER = 'TRANSFERENCIA_BANCARIA'
+}
 
 export const DIGITS = [
   '0',
