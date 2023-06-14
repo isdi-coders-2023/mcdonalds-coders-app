@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { OrderContextType, OrderType } from "../@types/order";
-import { STORAGE } from "../config";
-import useLocalStorage from "../hooks/useLocalStorage";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { OrderContextType, OrderType } from '../@types/order';
+import { PAYMENT_TYPE, STORAGE } from '../config';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const OrderContext = createContext<OrderContextType | null>(null);
 
@@ -18,14 +18,14 @@ export const OrderProvider = ({ children }: OrderProviderProps) => {
   const getNewOrder = (): OrderType => ({
     items: [],
     details: {
-      name: "",
-      address: "",
-      img: "",
+      name: '',
+      address: '',
+      img: '',
       isDelivery: false,
     },
     total: 0,
     confirmed: false,
-    paymentType: "",
+    paymentType: PAYMENT_TYPE.CASH,
   });
 
   const getInitialState = () => {
