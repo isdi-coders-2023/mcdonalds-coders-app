@@ -2,11 +2,11 @@
 
 describe('Buy product', () => {
   it('Follows the path ultil the order confirmation page', () => {
-    cy.visit('http://localhost:3000/')
-    cy.contains('Pedidos').click()
-    cy.get('.marker').eq(7).click()
-    cy.get('.price').eq(1).click({ force: true });
-    cy.contains('Agregar al pedido').click()
+    cy.visit('https://202305-mcdonalds-coders.netlify.app/')
+    cy.get('.nav-container li').eq(1).click()
+    cy.get('.marker').eq(0).click({ force: true })
+    cy.get('.price').eq(0).click({ force: true });
+    cy.get('.McButton').click()
     cy.get('.view-order-link').click()
     cy.contains('Pagar con la app').click()
     cy.get('#input-name').type('John Doe', { force: true });
