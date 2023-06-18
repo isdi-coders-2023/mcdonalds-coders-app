@@ -2,7 +2,6 @@ import { OrderStatusCreated } from "../classes/orderStatus";
 
 describe('Testing OrderStatusCreated', () => {
 
-
   beforeAll(() => {
 
   });
@@ -19,5 +18,3 @@ describe('Testing OrderStatusCreated', () => {
 
   });
 });
-
-//TODO: Test integrado para revisar todo el flujo de estados
