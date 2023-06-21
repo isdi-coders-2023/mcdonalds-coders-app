@@ -1,10 +1,12 @@
+import { PAYMENT_TYPE } from "../config";
+
 // @types.order.ts
 export type OrderType = {
   details: OrderAddressDetailsType;
   items: OrderItemType[];
   total: number;
   confirmed: boolean;
-  paymentType: string;
+  paymentType: PAYMENT_TYPE;
 };
 
 export type OrderItemType = {
