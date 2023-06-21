@@ -1,5 +1,5 @@
 import { OrderAddressDetailsType, OrderItemType } from "../../../@types/order"
-import { PaymentStrategy } from "../../payment/PaymentStrategy"
+import { BasePaymentStrategy, Payment } from "../../payment/PaymentStrategy"
 import { OrderStatus, OrderStatusCreated } from "./orderStatus"
 
 interface IOrder {
@@ -13,7 +13,7 @@ export class Order implements IOrder {
 
   details!: OrderAddressDetailsType
   items!: OrderItemType[]
-  paymentType!: PaymentStrategy
+  paymentType!: BasePaymentStrategy<Payment>
 
   constructor(status: OrderStatus) {
     this.changeStatus(status);

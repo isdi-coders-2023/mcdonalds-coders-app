@@ -1,20 +1,156 @@
-import { OrderStatusCreated } from "../classes/orderStatus";
+import { Order } from '../classes/order';
+import {
+  OrderStatusCanceled,
+  OrderStatusConfirmed,
+  OrderStatusCreated,
+  OrderStatusInProgress,
+  OrderStatusPickedUp,
+  OrderStatusWaitingtoDeliver
+} from '../classes/orderStatus';
+import { ORDER_STATUS_LITERAL } from "../../../config";
 
-describe('Testing OrderStatusCreated', () => {
+describe('OrderStatus', () => {
+  let order: Order;
+  let orderStatusCreated: OrderStatusCreated;
 
   beforeAll(() => {
+    orderStatusCreated = new OrderStatusCreated()
+    order = new Order(orderStatusCreated)
+  })
 
+  describe('OrderStatusCreated', () => {
+    it('should return correct order status literal: CREATED', () => {
+      expect(orderStatusCreated.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.CREATED);
+    });
+
+    it('should update order status to confirmed', () => {
+      orderStatusCreated.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.CONFIRMED);
+    });
+
+    it('should reset order status to canceled', () => {
+      orderStatusCreated.resetOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.CANCELED);
+    });
   });
 
-  test('GIVEN a OrderStatusCreated, WHEN is called updateOrder() THEN it should change status to Confirmed', () => {
+  describe('OrderStatusConfirmed', () => {
+    let orderStatusConfirmed: OrderStatusConfirmed;
 
-    let orderStatus: OrderStatusCreated;
+    beforeEach(() => {
+      orderStatusConfirmed = new OrderStatusConfirmed();
+      orderStatusConfirmed.setOrder(order);
+    });
 
-    orderStatus = new OrderStatusCreated()
+    it('should return correct order status literal: CONFIRMED', () => {
+      expect(orderStatusConfirmed.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.CONFIRMED);
+    });
 
+    it('should update order status to in progress', () => {
+      orderStatusConfirmed.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.IN_PROGRESS);
+    });
+
+    it('should reset order status to canceled', () => {
+      orderStatusConfirmed.resetOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.CANCELED);
+    });
   });
 
-  test('GIVEN a OrderStatusCreated, WHEN is called resetOrder() THEN it should change status to Canceled', () => {
+  describe('OrderStatusInProgress', () => {
+    let orderStatusInProgress: OrderStatusInProgress;
 
+    beforeEach(() => {
+      orderStatusInProgress = new OrderStatusInProgress();
+      orderStatusInProgress.setOrder(order);
+    });
+
+    it('should return correct order status literal: IN PROGRESS', () => {
+      expect(orderStatusInProgress.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.IN_PROGRESS);
+    });
+
+    it('should update order status to waiting to deliver', () => {
+      orderStatusInProgress.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.WAITING_TO_DELIVER);
+    });
+
+    it('should reset order status to canceled', () => {
+      console.log = jest.fn();
+      orderStatusInProgress.resetOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
+    });
   });
+
+  describe('OrderStatusWaitingtoDeliver', () => {
+    let orderStatusWaitingtoDeliver: OrderStatusWaitingtoDeliver;
+
+    beforeEach(() => {
+      orderStatusWaitingtoDeliver = new OrderStatusWaitingtoDeliver();
+      orderStatusWaitingtoDeliver.setOrder(order);
+    });
+
+    it('should return correct order status literal: WAITING TO DELIVER', () => {
+      expect(orderStatusWaitingtoDeliver.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.WAITING_TO_DELIVER);
+    });
+
+    it('should update order status to PICKED UP', () => {
+      orderStatusWaitingtoDeliver.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.PICKED_UP);
+    });
+
+    it('should reset order status to canceled', () => {
+      console.log = jest.fn();
+      orderStatusWaitingtoDeliver.resetOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
+    });
+  });
+
+  describe('OrderStatusPickedUp', () => {
+    let orderStatusPickedUp: OrderStatusPickedUp;
+
+    beforeEach(() => {
+      orderStatusPickedUp = new OrderStatusPickedUp();
+      orderStatusPickedUp.setOrder(order);
+    });
+
+    it('should return correct order status literal: PICKED UP', () => {
+      expect(orderStatusPickedUp.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.PICKED_UP);
+    });
+
+    it('should update order status to finished', () => {
+      orderStatusPickedUp.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.FINISHED);
+    });
+
+    it('should reset order status to canceled', () => {
+      console.log = jest.fn();
+      orderStatusPickedUp.resetOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
+    });
+  });
+
+  describe('OrderStatusCanceled', () => {
+    let orderStatusCanceled: OrderStatusCanceled;
+
+    beforeEach(() => {
+      orderStatusCanceled = new OrderStatusCanceled();
+      orderStatusCanceled.setOrder(order);
+    });
+
+    it('should return correct order status literal: CANCELED', () => {
+      expect(orderStatusCanceled.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.CANCELED);
+    });
+
+    it('should update order status to finished', () => {
+      orderStatusCanceled.updateOrder();
+      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.FINISHED);
+    });
+
+    it('should reset order status to canceled', () => {
+      console.log = jest.fn();
+      orderStatusCanceled.resetOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
+    });
+  });
+
 });

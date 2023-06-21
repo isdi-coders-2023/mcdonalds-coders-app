@@ -1,9 +1,10 @@
 import { ORDER_STATUS_LITERAL } from "../../../config";
+import { Order } from "./order";
 
 export abstract class OrderStatus {
-  protected order: any
+  protected order: Order
 
-  setOrder(order: any) {
+  setOrder(order: Order) {
     this.order = order
   }
 
