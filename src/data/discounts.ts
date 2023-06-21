@@ -1,5 +1,6 @@
-// Discounts & promotions
-const DISCOUNTS = [
+import { Discount } from "../core/discount/api";
+
+const DISCOUNTS: Discount[] = [
   {
     category: 'Para disfrutar en familia',
     id: 'burgers',

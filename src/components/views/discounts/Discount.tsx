@@ -1,25 +1,29 @@
-import './Discount.css';
-import Slider from '../../slider/Slider';
-import Carousel from '../../carousel/Carousel';
-import DISCOUNTS from '../../../data/discounts';
+import { URLS } from '../../../config';
 import DISCOUNT_SLIDES from '../../../data/discountSlides';
-import {URLS} from '../../../config';
+import { useDiscounts } from '../../../hooks/useDiscounts';
+import Carousel from '../../carousel/Carousel';
+import Slider from '../../slider/Slider';
+import './Discount.css';
 
-const Discount = () => (
-  <div className='Discount'>
-    <Carousel items={DISCOUNT_SLIDES} />
-    <div className='slides'>
-      {DISCOUNTS.map((value, index) => (
-        <div className='slider-container' key={index}>
-          <p>{value.category}</p>
-          <Slider
-            items={value.items}
-            link={URLS.DISCOUNTS + value.id + '/'}
-          />
-        </div>
-      ))}
+const DiscountComponent = () => {
+  const { discounts } = useDiscounts();
+
+  return (
+    <div className="Discount">
+      <Carousel items={DISCOUNT_SLIDES} />
+      <div className="slides">
+        {discounts.map((value, index) => (
+          <div className="slider-container" key={index}>
+            <p>{value.category}</p>
+            <Slider
+              items={value.items}
+              link={URLS.DISCOUNTS + value.id + '/'}
+            />
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
-export default Discount;
+export default DiscountComponent;
