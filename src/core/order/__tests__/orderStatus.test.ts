@@ -3,6 +3,7 @@ import {
   OrderStatusCanceled,
   OrderStatusConfirmed,
   OrderStatusCreated,
+  OrderStatusFinished,
   OrderStatusInProgress,
   OrderStatusPickedUp,
   OrderStatusWaitingtoDeliver
@@ -74,7 +75,7 @@ describe('OrderStatus', () => {
       expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.WAITING_TO_DELIVER);
     });
 
-    it('should reset order status to canceled', () => {
+    it('shouldn\'t reset the order status', () => {
       console.log = jest.fn();
       orderStatusInProgress.resetOrder();
       expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
@@ -93,12 +94,12 @@ describe('OrderStatus', () => {
       expect(orderStatusWaitingtoDeliver.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.WAITING_TO_DELIVER);
     });
 
-    it('should update order status to PICKED UP', () => {
+    it('should update order status to picked up', () => {
       orderStatusWaitingtoDeliver.updateOrder();
       expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.PICKED_UP);
     });
 
-    it('should reset order status to canceled', () => {
+    it('shouldn\'t reset the order status', () => {
       console.log = jest.fn();
       orderStatusWaitingtoDeliver.resetOrder();
       expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
@@ -122,9 +123,34 @@ describe('OrderStatus', () => {
       expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.FINISHED);
     });
 
-    it('should reset order status to canceled', () => {
+    it('shouldn\'t reset the order status', () => {
       console.log = jest.fn();
       orderStatusPickedUp.resetOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
+    });
+  });
+
+  describe('OrderStatusFinished', () => {
+    let orderStatusFinished: OrderStatusFinished;
+
+    beforeEach(() => {
+      orderStatusFinished = new OrderStatusFinished();
+      orderStatusFinished.setOrder(order);
+    });
+
+    it('should return correct order status literal: FINISHED', () => {
+      expect(orderStatusFinished.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.FINISHED);
+    });
+
+    it('shouldn\'t update the order status', () => {
+      console.log = jest.fn();
+      orderStatusFinished.updateOrder();
+      expect(console.log).toHaveBeenCalledWith('You can\'t update the order in the current state');
+    });
+
+    it('shouldn\'t reset the order status', () => {
+      console.log = jest.fn();
+      orderStatusFinished.resetOrder();
       expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
     });
   });
@@ -141,12 +167,13 @@ describe('OrderStatus', () => {
       expect(orderStatusCanceled.orderStatusLiteral()).toBe(ORDER_STATUS_LITERAL.CANCELED);
     });
 
-    it('should update order status to finished', () => {
+    it('shouldn\'t update the order status', () => {
+      console.log = jest.fn();
       orderStatusCanceled.updateOrder();
-      expect(order.getStatus()).toBe(ORDER_STATUS_LITERAL.FINISHED);
+      expect(console.log).toHaveBeenCalledWith('You can\'t update the order in the current state');
     });
 
-    it('should reset order status to canceled', () => {
+    it('shouldn\'t reset the order status', () => {
       console.log = jest.fn();
       orderStatusCanceled.resetOrder();
       expect(console.log).toHaveBeenCalledWith('You can\'t reset the order in the current state');
